@@ -12,7 +12,6 @@ import Admin from './Admin';
 import { Helmet } from 'react-helmet';
 import UserProvider from './UserProvider';
 
-
 const App = () => {
   return (
     <UserProvider>
