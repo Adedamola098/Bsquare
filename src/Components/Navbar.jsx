@@ -46,7 +46,6 @@ const Navbar = () => {
             <a href="#playstation" className="text-gray-700 font-semibold hover:text-blue-600">PlayStation</a>
             <a href="#contact" className="text-gray-700 font-semibold hover:text-blue-600">Contact</a>
 
-            {/* Categories Dropdown */}
             <div className="relative group">
               <button
                 className="text-gray-700 font-semibold hover:text-blue-600 flex items-center gap-1"

@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import Homepage from './Homepage';
-import SignUp from './SignUp';
-import ResetPassword from './ResetPassword';
-import Cart from './Cart';
-import { CartProvider } from './CartProvider';
-import PlayStation from './PlayStation';
-import Profile from './Profile';
-import Admin from './Admin';
 import { Helmet } from 'react-helmet';
+import { CartProvider } from './CartProvider';
 import UserProvider from './UserProvider';
 
+// Lazy load components for better performance
+const Homepage = lazy(() => import('./Homepage'));
+const SignUp = lazy(() => import('./SignUp'));
+const Login = lazy(() => import('./Login'));
+const ResetPassword = lazy(() => import('./ResetPassword'));
+const Cart = lazy(() => import('./Cart'));
+const PlayStation = lazy(() => import('./PlayStation'));
+const Profile = lazy(() => import('./Profile'));
+const Admin = lazy(() => import('./Admin'));
 
 const App = () => {
   return (
@@ -28,20 +29,37 @@ const App = () => {
             content="gaming accessories, online store, best gaming gear, shop gaming accessories"
           />
           <meta name="author" content="Bsquare" />
+          {/* Structured data for the website */}
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "name": "Bsquare",
+              "url": "https://bsquare-gaming-venture.netlify.app",
+              "potentialAction": {
+                "@type": "SearchAction",
+                "target": "https://bsquare-gaming-venture.netlify.app/?search={search_term_string}",
+                "query-input": "required name=search_term_string"
+              }
+            })}
+          </script>
         </Helmet>
 
         <Router>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/home" element={<Homepage />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/playstation" element={<PlayStation />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/admin" element={<Admin />} />
-          </Routes>
+          <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">Loading...</div>}>
+            <Routes>
+              {/* Default route set to Homepage */}
+              <Route path="/" element={<Homepage />} />
+              <Route path="/signup" element={<SignUp />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/home" element={<Homepage />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/playstation" element={<PlayStation />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+          </Suspense>
         </Router>
       </CartProvider>
     </UserProvider>
