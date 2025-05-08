@@ -4,15 +4,6 @@ import { Helmet } from 'react-helmet';
 import { CartProvider } from './CartProvider';
 import UserProvider from './UserProvider';
 
-// Lazy load components for better performance
-const Homepage = lazy(() => import('./Homepage'));
-const SignUp = lazy(() => import('./SignUp'));
-const Login = lazy(() => import('./Login'));
-const ResetPassword = lazy(() => import('./ResetPassword'));
-const Cart = lazy(() => import('./Cart'));
-const PlayStation = lazy(() => import('./PlayStation'));
-const Profile = lazy(() => import('./Profile'));
-const Admin = lazy(() => import('./Admin'));
 
 const App = () => {
   return (
