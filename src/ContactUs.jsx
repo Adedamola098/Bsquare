@@ -124,7 +124,7 @@ const ContactUs = () => {
                 lawalabiolaibileh@gmail.com
               </a>
             </p>
-            <p className="mt-1">
+            <p className="mt-1 gap-10">
               Phone:{" "}
               <a href="tel:+2348108153209" className="text-blue-400 hover:underline font-semibold">
                 +234 810 815 3209
