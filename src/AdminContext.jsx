@@ -10,7 +10,15 @@ const initialProducts = [
 export const AdminProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
     const storedProducts = JSON.parse(localStorage.getItem('adminProducts'));
-    return storedProducts || initialProducts;
+    // Ensure prices are numbers when loading from localStorage
+    if (storedProducts) {
+      return storedProducts.map(product => ({
+        ...product,
+        price: parseFloat(product.price) || 0,
+        stock: parseInt(product.stock) || 0
+      }));
+    }
+    return initialProducts;
   });
 
   useEffect(() => {
