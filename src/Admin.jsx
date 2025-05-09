@@ -10,7 +10,7 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [users, setUsers] = useState(() => JSON.parse(localStorage.getItem('adminUsers')) || []);
   const [orders, setOrders] = useState(() => JSON.parse(localStorage.getItem('adminOrders')) || []);
-  const [newProduct, setNewProduct] = useState({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
+  const [newProduct, setNewProduct] = useState({ name: '', category: '', price: 0, description: '', image: '', stock: 0 });
   const [editingProduct, setEditingProduct] = useState(null);
   const [notification, setNotification] = useState('');
   const [sessionTimeout, setSessionTimeout] = useState(null);
@@ -68,7 +68,7 @@ const Admin = () => {
     e.preventDefault();
     const productWithId = { ...newProduct, id: Date.now() };
     setProducts([...products, productWithId]);
-    setNewProduct({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
+    setNewProduct({ name: '', category: '', price: 0, description: '', image: '', stock: 0 });
     setNotification('Product added successfully.');
     setTimeout(() => setNotification(''), 3000);
     logActivity(`Product ${newProduct.name} added`);
@@ -84,7 +84,7 @@ const Admin = () => {
     const updatedProducts = products.map(p => p.id === editingProduct.id ? newProduct : p);
     setProducts(updatedProducts);
     setEditingProduct(null);
-    setNewProduct({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
+    setNewProduct({ name: '', category: '', price: 0, description: '', image: '', stock: 0 });
     setNotification('Product updated successfully.');
     setTimeout(() => setNotification(''), 3000);
     logActivity(`Product ${newProduct.name} updated`);
@@ -99,7 +99,11 @@ const Admin = () => {
   };
 
   const handleChange = (e) => {
-    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setNewProduct({
+      ...newProduct,
+      [name]: name === 'price' || name === 'stock' ? parseFloat(value) || 0 : value
+    });
   };
 
   const exportUsers = () => {
@@ -357,7 +361,7 @@ const Admin = () => {
                   <tr key={product.id} className="border-b border-gray-700">
                     <td className="p-1 sm:p-2 text-xs sm:text-sm">{product.name}</td>
                     <td className="p-1 sm:p-2 text-xs sm:text-sm">{product.category}</td>
-                    <td className="p-1 sm:p-2 text-xs sm:text-sm">₦{product.price.toLocaleString()}</td>
+                    <td className="p-1 sm:p-2 text-xs sm:text-sm">₦{(typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0).toLocaleString()}</td>
                     <td className="p-1 sm:p-2 text-xs sm:text-sm">{product.stock}</td>
                     <td className="p-1 sm:p-2 text-xs sm:text-sm flex flex-col sm:flex-row gap-1 sm:gap-2">
                       <button
