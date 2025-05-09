@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import adminConfig from './config/AdminConfigs';
 import { saveAs } from 'file-saver';
-import { storeproducts } from './Data/index';
-import { Products } from './Data/index';
 import { Helmet } from 'react-helmet';
-
-// Merge Products and storeproducts, removing duplicates based on id
-const initialProducts = [...new Map([...storeproducts, ...Products].map(product => [product.id, product])).values()];
+import { AdminContext } from './AdminContext';
 
 const Admin = () => {
+  const { products, setProducts } = useContext(AdminContext);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [users, setUsers] = useState(() => JSON.parse(localStorage.getItem('adminUsers')) || []);
   const [orders, setOrders] = useState(() => JSON.parse(localStorage.getItem('adminOrders')) || []);
-  const [products, setProducts] = useState(() => JSON.parse(localStorage.getItem('adminProducts')) || initialProducts);
   const [newProduct, setNewProduct] = useState({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
   const [editingProduct, setEditingProduct] = useState(null);
   const [notification, setNotification] = useState('');
@@ -22,7 +18,6 @@ const Admin = () => {
   const [activityLog, setActivityLog] = useState(() => JSON.parse(localStorage.getItem('adminActivityLog')) || []);
 
   useEffect(() => {
-    // Session timeout (30 minutes)
     if (isAuthenticated) {
       const timeout = setTimeout(() => {
         handleLogout();
@@ -35,12 +30,10 @@ const Admin = () => {
   }, [isAuthenticated]);
 
   useEffect(() => {
-    // Save to localStorage whenever state changes
     localStorage.setItem('adminUsers', JSON.stringify(users));
     localStorage.setItem('adminOrders', JSON.stringify(orders));
-    localStorage.setItem('adminProducts', JSON.stringify(products));
     localStorage.setItem('adminActivityLog', JSON.stringify(activityLog));
-  }, [users, orders, products, activityLog]);
+  }, [users, orders, activityLog]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -73,9 +66,8 @@ const Admin = () => {
 
   const handleAddProduct = (e) => {
     e.preventDefault();
-    const productWithId = { ...newProduct, id: products.length + 1 };
-    const updatedProducts = [...products, productWithId];
-    setProducts(updatedProducts);
+    const productWithId = { ...newProduct, id: Date.now() };
+    setProducts([...products, productWithId]);
     setNewProduct({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
     setNotification('Product added successfully.');
     setTimeout(() => setNotification(''), 3000);
@@ -89,7 +81,7 @@ const Admin = () => {
 
   const handleSaveProduct = (e) => {
     e.preventDefault();
-    const updatedProducts = products.map(p => (p.id === editingProduct.id ? newProduct : p));
+    const updatedProducts = products.map(p => p.id === editingProduct.id ? newProduct : p);
     setProducts(updatedProducts);
     setEditingProduct(null);
     setNewProduct({ name: '', category: '', price: '', description: '', image: '', stock: 0 });
@@ -130,7 +122,7 @@ const Admin = () => {
 
   const logActivity = (action) => {
     const logEntry = `${new Date().toLocaleString()} - ${action}`;
-    const updatedLog = [logEntry, ...activityLog].slice(0, 10); // Limit to 10 entries
+    const updatedLog = [logEntry, ...activityLog].slice(0, 10);
     setActivityLog(updatedLog);
   };
 
