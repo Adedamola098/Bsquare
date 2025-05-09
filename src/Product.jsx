@@ -82,7 +82,9 @@ const Product = () => {
               <div className="p-6 relative">
                 <h4 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">{product.name}</h4>
                 <p className="text-gray-700 text-sm mb-4 line-clamp-2 opacity-90">{product.description}</p>
-                <p className="text-xl font-extrabold text-blue-600 mb-5">₦{product.price.toFixed(2)}</p>
+                <p className="text-xl font-extrabold text-blue-600 mb-5">
+                  ₦{(typeof product.price === 'number' ? product.price : parseFloat(product.price) || 0).toFixed(2)}
+                </p>
                 <button
                   onClick={() => handleAddToCart(product)}
                   className="block text-center py-3 px-6 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-indigo-700 transition transform hover:scale-105 shadow-md"
