@@ -21,8 +21,10 @@ const Product = () => {
     };
   }, []);
 
-  const categories = ['All', ...new Set(products.map(p => p.category))];
-  const filteredProducts = selectedCategory === 'All' ? products : products.filter(p => p.category === selectedCategory);
+  // Filter for featured products only
+  const featuredProducts = products.filter(p => p.featured);
+  const categories = ['All', ...new Set(featuredProducts.map(p => p.category))];
+  const filteredProducts = selectedCategory === 'All' ? featuredProducts : featuredProducts.filter(p => p.category === selectedCategory);
   const finalProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery));
 
   const handleAddToCart = (product) => {
@@ -34,13 +36,13 @@ const Product = () => {
   return (
     <section id="products" className="min-h-screen bg-transparent py-16">
       <Helmet>
-        <title>Epic Gaming Collection | Your Gaming Accessories Store</title>
-        <meta name="description" content="Browse our epic collection of gaming accessories including headsets, controllers, and more for the ultimate gaming experience!" />
-        <meta name="keywords" content="gaming accessories, gaming store, buy gaming gear, headsets, controllers, online game store, game collection" />
+        <title>Featured Products | Your Gaming Accessories Store</title>
+        <meta name="description" content="Browse our featured collection of gaming accessories including headsets, controllers, and more for the ultimate gaming experience!" />
+        <meta name="keywords" content="gaming accessories, gaming store, buy gaming gear, headsets, controllers, online game store, featured products" />
         <meta name="author" content="Bsquare" />
       </Helmet>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-extrabold text-white text-center mb-12 drop-shadow-lg">Epic Gaming Collection</h2>
+        <h2 className="text-4xl font-extrabold text-white text-center mb-12 drop-shadow-lg">Featured Products</h2>
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           {categories.map(category => (
             <button
@@ -93,7 +95,7 @@ const Product = () => {
                 </button>
               </div>
             </div>
-          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No products found.</p>}
+          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No featured products found.</p>}
         </div>
       </div>
     </section>
