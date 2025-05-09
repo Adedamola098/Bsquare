@@ -1,9 +1,18 @@
-import React, { lazy, Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
-import { CartProvider } from './CartProvider';
-import UserProvider from './UserProvider';
+import React, { lazy, Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { CartProvider } from "./CartProvider";
+import UserProvider from "./UserProvider";
 
+// Lazy Load Components
+const Homepage = lazy(() => import("./Homepage"));
+const SignUp = lazy(() => import("./SignUp"));
+const Login = lazy(() => import("./Login"));
+const Cart = lazy(() => import("./Cart"));
+const PlayStation = lazy(() => import("./PlayStation"));
+const ResetPassword = lazy(() => import("./ResetPassword"));
+const Profile = lazy(() => import("./Profile"));
+const Admin = lazy(() => import("./Admin"));
 
 const App = () => {
   return (
@@ -20,7 +29,6 @@ const App = () => {
             content="gaming accessories, online store, best gaming gear, shop gaming accessories"
           />
           <meta name="author" content="Bsquare" />
-          {/* Structured data for the website */}
           <script type="application/ld+json">
             {JSON.stringify({
               "@context": "https://schema.org",
@@ -29,17 +37,23 @@ const App = () => {
               "url": "https://bsquare-gaming-venture.netlify.app",
               "potentialAction": {
                 "@type": "SearchAction",
-                "target": "https://bsquare-gaming-venture.netlify.app/?search={search_term_string}",
-                "query-input": "required name=search_term_string"
-              }
+                "target":
+                  "https://bsquare-gaming-venture.netlify.app/?search={search_term_string}",
+                "query-input": "required name=search_term_string",
+              },
             })}
           </script>
         </Helmet>
 
         <Router>
-          <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">Loading...</div>}>
+          <Suspense
+            fallback={
+              <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
+                Loading...
+              </div>
+            }
+          >
             <Routes>
-              {/* Default route set to Homepage */}
               <Route path="/" element={<Homepage />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/login" element={<Login />} />
