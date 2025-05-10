@@ -130,7 +130,7 @@ const ContactUs = () => {
                 +234 810 815 3209
               </a>
               <a href="tel:+2348108153209" className="text-blue-400 hover:underline font-semibold">
-                +234 816 582 6960
+                +234 816 582 6970
               </a>
             </p>
           </div>
