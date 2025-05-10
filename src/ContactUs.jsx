@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet';
 
 const ContactUs = () => {
   const form = useRef();
-  const [statusMessage, setStatusMessage] = useState('');
+  const [statusMessage, se
+         tStatusMessage] = useState('');
 
   const sendEmail = (e) => {
     e.preventDefault();
