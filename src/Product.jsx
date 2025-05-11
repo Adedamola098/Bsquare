@@ -95,7 +95,7 @@ const Product = () => {
                 </button>
               </div>
             </div>
-          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No featured products found.</p>}
+          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No featured product found.</p>}
         </div>
       </div>
     </section>
