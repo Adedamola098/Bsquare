@@ -22,7 +22,7 @@ const Section = () => {
           href="#products"
           className="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-full hover:from-blue-700 hover:to-indigo-700 transition transform hover:scale-105 shadow-lg"
         >
-          Start Gaming
+          Start Gaming Now
           <ArrowRight className="ml-2" size={20} />
         </a>
         {/* Feature Highlights */}
