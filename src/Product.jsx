@@ -21,8 +21,9 @@ const Product = () => {
     };
   }, []);
 
-  // Filter for featured products only
+  console.log('Products from context:', products); // Debug log
   const featuredProducts = products.filter(p => p.featured);
+  console.log('Featured products:', featuredProducts); // Debug log
   const categories = ['All', ...new Set(featuredProducts.map(p => p.category))];
   const filteredProducts = selectedCategory === 'All' ? featuredProducts : featuredProducts.filter(p => p.category === selectedCategory);
   const finalProducts = filteredProducts.filter(p => p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery));
@@ -95,7 +96,7 @@ const Product = () => {
                 </button>
               </div>
             </div>
-          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No featured product found.</p>}
+          )) : <p className="text-white text-center col-span-full text-lg opacity-80">No featured products found.</p>}
         </div>
       </div>
     </section>
