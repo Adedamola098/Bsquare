@@ -3,13 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import { AdminContext } from "./AdminContext";
 import { CartContext } from "./CartProvider";
 
-const ProductDetails = () => {
+const StoreDetails = () => {
   const { id } = useParams();
-  const { products } = useContext(AdminContext);
+  const { storeProducts } = useContext(AdminContext);
   const { addToCart } = useContext(CartContext);
 
-  const product = products.find(p => p.id.toString() === id);
-  if (!product) return <p className="text-white text-center mt-20">Product not found.</p>;
+  const product = storeProducts.find(p => p.id.toString() === id);
+  if (!product) return <p className="text-white text-center mt-20">Item not found.</p>;
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-20 px-6">
@@ -26,12 +26,12 @@ const ProductDetails = () => {
         >
           Add to Cart
         </button>
-        <Link to="/products">
-          <p className="text-blue-400 underline mt-6 text-center">Back to Products</p>
+        <Link to="/store">
+          <p className="text-blue-400 underline mt-6 text-center">Back to Store</p>
         </Link>
       </div>
     </div>
   );
 };
 
-export default ProductDetails;
+export default StoreDetails;
