@@ -12,7 +12,7 @@ export const Products = [
       category: 'Action',
       name: 'Marvel\'s Spider-Man 2',
       price: 40000,
-      image: '',
+      image: 'Spiderman.jpg',
       description: 'Swing across New York City as Peter Parker and Miles Morales in this superhero sequel.'
     },
     {
@@ -20,7 +20,7 @@ export const Products = [
       category: 'Action',
       name: 'Ghost of Tsushima Director\'s Cut',
       price: 39000,
-      image: '',
+      image: 'Ghost.webp',
       description: 'Become a samurai warrior and liberate Tsushima island from Mongol invaders.'
     },
   

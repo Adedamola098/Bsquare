@@ -5,7 +5,7 @@ import { AdminContext } from './AdminContext';
 import { Link } from 'react-router-dom';
 
 const Product = () => {
-  const { products } = useContext(AdminContext); // Only games
+  const { products } = useContext(AdminContext);
   const { addToCart } = useContext(CartContext);
 
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -45,8 +45,32 @@ const Product = () => {
 
   return (
     <section id="products" className="min-h-screen bg-transparent py-16">
+
       <Helmet>
-        <title>Products | Bsquare Gaming Store</title>
+        <meta name="description" content="Browse Playstation pads, console games, gaming accessories, tools, and more at Bsquare Gaming Store." />
+        <meta name="keywords" content="gaming pads, PS5 pad, PS4 pad, buy PS5 pad, gaming tools, console games Nigeria" />
+        <link rel="canonical" href="https://www.bsquare.shop/products" />
+
+        {/* Schema: Product List */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "itemListElement": finalProducts.map((p, i) => ({
+              "@type": "Product",
+              "position": i + 1,
+              "name": p.name,
+              "image": p.image,
+              "description": p.description,
+              "offers": {
+                "@type": "Offer",
+                "priceCurrency": "NGN",
+                "price": p.price,
+                "availability": "https://schema.org/InStock"
+              }
+            }))
+          })}
+        </script>
       </Helmet>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,7 +111,7 @@ const Product = () => {
                     className="w-full h-56 object-contain"
                   />
 
-                  <h4 className="text-2xl font-bold mt-4">{product.name}</h4>
+                  <h3 className="text-2xl font-bold mt-4">{product.name}</h3>
                   <p className="text-gray-600">{product.description}</p>
 
                   <p className="text-lg font-bold text-blue-600 mt-2">
