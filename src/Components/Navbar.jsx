@@ -35,7 +35,7 @@ const Navbar = () => {
       <header className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-md shadow-lg py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <Link to="/" className="text-3xl font-bold text-blue-600">
-          <img src="WhatsApp Image 2025-05-08 at 11.32.28_b497341d.jpg" alt=""
+          <img src="og-image.jpg" alt=""
           className='h-14 w-14 rounded-full' />
           
           </Link>
