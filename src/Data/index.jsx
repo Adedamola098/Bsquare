@@ -89,7 +89,6 @@ export const Products = [
     {  id: 7, name: 'Installation of Games PS3', price: 1500, description: 'Professional PS3 game installation per game.', image: 'download (48).jpeg',category: 'Service' },
     {  id: 8, name: 'Installation of Games PS4 Package', price: 60000, description: 'Complete PS4 game installation package.', image: 'https://th.bing.com/th/id/OIP.hevMAJxdjWoA8-U-SgSh6AHaEK?w=296&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7', category: 'Service' },
     {  id: 9, name: 'Installation of Games PS4', price: 1500, description: 'Professional PS4 game installation per game.', image: 'https://th.bing.com/th/id/OIP.hevMAJxdjWoA8-U-SgSh6AHaEK?w=296&h=180&c=7&r=0&o=5&dpr=1.1&pid=1.7', category: 'Service' },
-    { name: 'PlayStation 2 ', price: 40000, description: 'The original PS2 with DVD playback and iconic game library.', image: 'download (49).jpeg', category: 'Console' },
     
     {  id: 10, name: 'PlayStation 3 Fat', price: 90000, description: 'Launch model of the PS3 with backwards compatibility.', image: 'OIP (8).jpeg', category: 'Console' },
     {  id: 11, name: 'PlayStation 3 Slim', price: 140000, description: 'More efficient and compact version of the PlayStation 3.', image: 'download (50).jpeg', category: 'Console' },
